@@ -200,7 +200,9 @@ impl WgpuCanvas {
             let surface_format = surface_caps
                 .formats
                 .iter()
-                .find(|f| !f.is_srgb())
+                .find(|f|
+                    !f.is_srgb() && f.target_component_alignment().is_some_and(|v| v == 1)
+                )
                 .copied()
                 .unwrap_or(surface_caps.formats[0]);
 
@@ -254,7 +256,9 @@ impl WgpuCanvas {
             let surface_format = surface_caps
                 .formats
                 .iter()
-                .find(|f| !f.is_srgb())
+                .find(|f|
+                    !f.is_srgb() && f.target_component_alignment().is_some_and(|v| v == 1)
+                )
                 .copied()
                 .unwrap_or(surface_caps.formats[0]);
 
